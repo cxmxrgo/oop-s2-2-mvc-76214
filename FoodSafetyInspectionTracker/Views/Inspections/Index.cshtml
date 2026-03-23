@@ -1,0 +1,36 @@
+@model IEnumerable<FoodSafetyInspectionTracker.Models.Inspection>
+@{
+    ViewData["Title"] = "Inspections";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Inspections</h2>
+    @if (User.IsInRole("Admin") || User.IsInRole("Inspector"))
+    {
+        <a class="btn btn-primary" asp-action="Create">Create Inspection</a>
+    }
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Premises</th>
+            <th>Score</th>
+            <th>Outcome</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.InspectionDate.ToString("yyyy-MM-dd")</td>
+            <td>@item.Premises?.Name</td>
+            <td>@item.Score</td>
+            <td>@item.Outcome</td>
+            <td>@item.Notes</td>
+        </tr>
+    }
+    </tbody>
+</table>

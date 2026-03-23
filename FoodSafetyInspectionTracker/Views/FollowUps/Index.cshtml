@@ -1,0 +1,41 @@
+@model IEnumerable<FoodSafetyInspectionTracker.Models.FollowUp>
+@{
+    ViewData["Title"] = "Follow-Ups";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Follow-Ups</h2>
+    @if (User.IsInRole("Admin") || User.IsInRole("Inspector"))
+    {
+        <a class="btn btn-primary" asp-action="Create">Create Follow-Up</a>
+    }
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Premises</th>
+            <th>Due Date</th>
+            <th>Status</th>
+            <th>Closed Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Inspection?.Premises?.Name</td>
+            <td>@item.DueDate.ToString("yyyy-MM-dd")</td>
+            <td>@item.Status</td>
+            <td>@item.ClosedDate?.ToString("yyyy-MM-dd")</td>
+            <td>
+                @if ((User.IsInRole("Admin") || User.IsInRole("Inspector")) && item.Status == FoodSafetyInspectionTracker.Models.FollowUpStatus.Open)
+                {
+                    <a asp-action="Close" asp-route-id="@item.Id">Close</a>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

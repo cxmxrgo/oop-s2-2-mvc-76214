@@ -1,0 +1,21 @@
+@model FoodSafetyInspectionTracker.Models.ViewModels.FollowUpCloseViewModel
+@{
+    ViewData["Title"] = "Close Follow-Up";
+}
+
+<h2>Close Follow-Up</h2>
+
+<form asp-action="Close" method="post">
+    <input asp-for="Id" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="ClosedDate" class="form-label"></label>
+        <input asp-for="ClosedDate" type="date" class="form-control" />
+        <span asp-validation-for="ClosedDate" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Close</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

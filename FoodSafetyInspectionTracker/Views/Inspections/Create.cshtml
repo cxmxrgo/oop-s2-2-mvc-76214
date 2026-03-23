@@ -1,0 +1,37 @@
+@model FoodSafetyInspectionTracker.Models.Inspection
+@{
+    ViewData["Title"] = "Create Inspection";
+}
+
+<h2>Create Inspection</h2>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="PremisesId" class="form-label">Premises</label>
+        <select asp-for="PremisesId" class="form-select" asp-items="ViewBag.PremisesId"></select>
+    </div>
+    <div class="mb-3">
+        <label asp-for="InspectionDate" class="form-label"></label>
+        <input asp-for="InspectionDate" type="date" class="form-control" />
+        <span asp-validation-for="InspectionDate" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Score" class="form-label"></label>
+        <input asp-for="Score" class="form-control" />
+        <span asp-validation-for="Score" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Outcome" class="form-label"></label>
+        <select asp-for="Outcome" class="form-select" asp-items="Html.GetEnumSelectList<FoodSafetyInspectionTracker.Models.InspectionOutcome>()"></select>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Notes" class="form-label"></label>
+        <textarea asp-for="Notes" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
