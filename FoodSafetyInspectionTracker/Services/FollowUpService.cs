@@ -43,6 +43,12 @@ public class FollowUpService(ApplicationDbContext dbContext, ILogger<FollowUpSer
             return (false, "Closed date is required.");
         }
 
+        if (closedDate.Value.Date > DateTime.UtcNow.Date)
+        {
+            logger.LogWarning("Close follow-up blocked because closed date is in the future. FollowUpId: {FollowUpId}, ClosedDate: {ClosedDate}", id, closedDate);
+            return (false, "Closed date cannot be in the future.");
+        }
+
         followUp.Status = FollowUpStatus.Closed;
         followUp.ClosedDate = closedDate.Value.Date;
 

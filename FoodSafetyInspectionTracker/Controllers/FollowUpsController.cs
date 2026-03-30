@@ -67,6 +67,11 @@ public class FollowUpsController(ApplicationDbContext dbContext, IFollowUpServic
     [Authorize(Roles = $"{ApplicationRoles.Admin},{ApplicationRoles.Inspector}")]
     public async Task<IActionResult> Close(FollowUpCloseViewModel model)
     {
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
         var result = await followUpService.CloseAsync(model.Id, model.ClosedDate);
         if (!result.Success)
         {

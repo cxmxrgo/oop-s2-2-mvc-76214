@@ -19,6 +19,7 @@ public class Premises
     public string Town { get; set; } = string.Empty;
 
     [Required]
+    [EnumDataType(typeof(RiskRating))]
     public RiskRating RiskRating { get; set; }
 
     public ICollection<Inspection> Inspections { get; set; } = [];

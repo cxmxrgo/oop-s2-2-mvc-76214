@@ -16,6 +16,7 @@ public class Inspection
     public int Score { get; set; }
 
     [Required]
+    [EnumDataType(typeof(InspectionOutcome))]
     public InspectionOutcome Outcome { get; set; }
 
     [StringLength(500)]

@@ -13,6 +13,7 @@ public class FollowUp
     public DateTime DueDate { get; set; }
 
     [Required]
+    [EnumDataType(typeof(FollowUpStatus))]
     public FollowUpStatus Status { get; set; } = FollowUpStatus.Open;
 
     public DateTime? ClosedDate { get; set; }
