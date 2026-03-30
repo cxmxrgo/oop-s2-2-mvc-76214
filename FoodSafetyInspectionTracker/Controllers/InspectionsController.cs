@@ -1,6 +1,7 @@
 using FoodSafetyInspectionTracker.Constants;
 using FoodSafetyInspectionTracker.Data;
 using FoodSafetyInspectionTracker.Models;
+using FoodSafetyInspectionTracker.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace FoodSafetyInspectionTracker.Controllers;
 
 [Authorize(Roles = $"{ApplicationRoles.Admin},{ApplicationRoles.Inspector},{ApplicationRoles.Viewer}")]
-public class InspectionsController(ApplicationDbContext dbContext, ILogger<InspectionsController> logger) : Controller
+public class InspectionsController(ApplicationDbContext dbContext, IInspectionService inspectionService, ILogger<InspectionsController> logger) : Controller
 {
     public async Task<IActionResult> Index()
     {
@@ -40,9 +41,15 @@ public class InspectionsController(ApplicationDbContext dbContext, ILogger<Inspe
             return View(inspection);
         }
 
-        dbContext.Inspections.Add(inspection);
-        await dbContext.SaveChangesAsync();
-        logger.LogInformation("Inspection created. PremisesId: {PremisesId}, InspectionId: {InspectionId}, Outcome: {Outcome}", inspection.PremisesId, inspection.Id, inspection.Outcome);
+        var result = await inspectionService.CreateAsync(inspection);
+        if (!result.Success)
+        {
+            ModelState.AddModelError(string.Empty, result.Error ?? "Unable to create inspection.");
+            await PopulatePremisesAsync();
+            return View(inspection);
+        }
+
+        logger.LogInformation("Inspection create request successful for premises {PremisesId}", inspection.PremisesId);
         return RedirectToAction(nameof(Index));
     }
 

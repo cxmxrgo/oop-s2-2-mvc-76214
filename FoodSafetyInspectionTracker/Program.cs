@@ -32,6 +32,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<FoodSafetyInspectionTracker.Services.IDashboardService, FoodSafetyInspectionTracker.Services.DashboardService>();
 builder.Services.AddScoped<FoodSafetyInspectionTracker.Services.IFollowUpService, FoodSafetyInspectionTracker.Services.FollowUpService>();
+builder.Services.AddScoped<FoodSafetyInspectionTracker.Services.IInspectionService, FoodSafetyInspectionTracker.Services.InspectionService>();
 
 var app = builder.Build();
 
