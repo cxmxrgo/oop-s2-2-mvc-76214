@@ -1,4 +1,23 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿(() => {
+    const html = document.documentElement;
+    const toggleButton = document.getElementById("themeToggle");
 
-// Write your JavaScript code.
+    if (!toggleButton) {
+        return;
+    }
+
+    const getTheme = () => html.getAttribute("data-theme") || "light";
+
+    const applyButtonText = () => {
+        toggleButton.textContent = getTheme() === "dark" ? "Light mode" : "Dark mode";
+    };
+
+    applyButtonText();
+
+    toggleButton.addEventListener("click", () => {
+        const nextTheme = getTheme() === "dark" ? "light" : "dark";
+        html.setAttribute("data-theme", nextTheme);
+        localStorage.setItem("theme", nextTheme);
+        applyButtonText();
+    });
+})();

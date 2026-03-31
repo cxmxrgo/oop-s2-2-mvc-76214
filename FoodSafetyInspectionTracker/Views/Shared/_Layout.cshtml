@@ -4,6 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Carlos Camargo - 76214</title>
+    <script>
+        (function () {
+            var savedTheme = localStorage.getItem("theme");
+            if (savedTheme === "dark" || savedTheme === "light") {
+                document.documentElement.setAttribute("data-theme", savedTheme);
+            }
+        })();
+    </script>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -33,6 +41,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="FollowUps" asp-action="Index">Follow-Ups</a>
                         </li>
                     </ul>
+                    <button id="themeToggle" type="button" class="btn btn-outline-secondary btn-sm me-3" aria-label="Toggle dark mode">Dark mode</button>
                     <partial name="_LoginPartial" />
                 </div>
             </div>

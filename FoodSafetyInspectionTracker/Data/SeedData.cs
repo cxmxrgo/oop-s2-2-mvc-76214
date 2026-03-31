@@ -1,5 +1,6 @@
 using FoodSafetyInspectionTracker.Constants;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace FoodSafetyInspectionTracker.Data;
 
@@ -11,7 +12,7 @@ public static class SeedData
         var scopedServices = scope.ServiceProvider;
 
         var context = scopedServices.GetRequiredService<ApplicationDbContext>();
-        context.Database.EnsureCreated();
+        await context.Database.MigrateAsync();
 
         var roleManager = scopedServices.GetRequiredService<RoleManager<IdentityRole>>();
         var userManager = scopedServices.GetRequiredService<UserManager<IdentityUser>>();
