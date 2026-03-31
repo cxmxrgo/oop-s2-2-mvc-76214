@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using MySql.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
@@ -63,7 +63,7 @@ namespace FoodSafetyInspectionTracker.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "varchar(120)", maxLength: 120, nullable: false),
                     Address = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false),
                     Town = table.Column<string>(type: "varchar(80)", maxLength: 80, nullable: false),
@@ -80,7 +80,7 @@ namespace FoodSafetyInspectionTracker.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     RoleId = table.Column<string>(type: "varchar(255)", nullable: false),
                     ClaimType = table.Column<string>(type: "longtext", nullable: true),
                     ClaimValue = table.Column<string>(type: "longtext", nullable: true)
@@ -102,7 +102,7 @@ namespace FoodSafetyInspectionTracker.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<string>(type: "varchar(255)", nullable: false),
                     ClaimType = table.Column<string>(type: "longtext", nullable: true),
                     ClaimValue = table.Column<string>(type: "longtext", nullable: true)
@@ -191,7 +191,7 @@ namespace FoodSafetyInspectionTracker.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     PremisesId = table.Column<int>(type: "int", nullable: false),
                     InspectionDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Score = table.Column<int>(type: "int", nullable: false),
@@ -215,7 +215,7 @@ namespace FoodSafetyInspectionTracker.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     InspectionId = table.Column<int>(type: "int", nullable: false),
                     DueDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
